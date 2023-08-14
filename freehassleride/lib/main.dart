@@ -52,109 +52,140 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final HomeBloc homeBloc = HomeBloc();
-  int _counter = 0;
-  bool show = true;
-
-  void _incrementCounter() {
-    setState(() {
-      show = !show;
-      _counter++;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      show = true;
-      _counter--;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeBloc, HomeState>(
-      bloc: homeBloc,
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        if (state is HomeHideNavBar) {}
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(widget.title),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  homeBloc.add(ExpandButtonClicked());
-                },
-                icon: Icon(Icons.add),
-              ),
-              IconButton(
-                onPressed: () {
-                  homeBloc.add(RetractButtonClicked());
-                },
-                icon: Icon(Icons.remove),
-              )
-            ],
-          ),
-          body: Stack(
-            children: [
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      'Number of Times',
-                    ),
-                    Text(
-                      '$_counter',
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                  ],
-                ),
-              ),
-              show
-                  ? Positioned(
-                      top: 100,
-                      right: 0,
-                      child: Column(
-                        children: [
-                          FloatingActionButton(
-                            onPressed: _incrementCounter,
-                            child: Text(
-                              ">",
-                              style: TextStyle(
-                                  color: Theme.of(context).cardColor,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold),
-                            ),
+    return BlocProvider(
+      create: (context) => homeBloc,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("how are you "),
+        ),
+        body: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            if (state is CounterState) {
+              return Stack(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.red,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FloatingActionButton(
+                          onPressed: () {
+                            homeBloc.add(ActionButoonClicked());
+                            // homeBloc.add(ExpandButtonClicked());
+                          },
+                          child: const Text(
+                            "+",
+                            style: TextStyle(fontSize: 30),
                           ),
-                          Container(
-                            height: 500,
-                            width: 80,
-                            color: Theme.of(context).primaryColor,
+                        ),
+                        Container(
+                          width: 200,
+                          height: 200,
+                          color: Colors.blue,
+                          child: Center(
+                              child: Text(
+                            'Counter: ${state.counter}',
+                            style: TextStyle(fontSize: 30),
+                          )),
+                        ),
+                      ],
+                    ),
+                  ),
+                  state.show
+                      ? Positioned(
+                          top: 100,
+                          right: 0,
+                          child: Column(
+                            children: [
+                              Container(
+                                child: Text(
+                                  ">",
+                                  style: TextStyle(
+                                      color: Theme.of(context).cardColor,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Container(
+                                height: 300,
+                                width: 80,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  : Positioned(
-                      bottom: MediaQuery.of(context).size.height / 2 - 80,
-                      right: 0,
-                      child: FloatingActionButton(
-                        tooltip: "smallone",
-                        onPressed: _incrementCounter,
-                        child: const Icon(Icons.add),
-                      ))
-            ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ), // This trailing comma makes auto-formatting nicer for build methods.
-        );
-      },
-      listenWhen: (previous, current) => current is HomeInitial,
-      buildWhen: (previous, current) => current is! HomeInitial,
+                        )
+                      : Positioned(
+                          bottom: MediaQuery.of(context).size.height / 2 - 80,
+                          right: 0,
+                          child: Container(
+                            child: const Icon(Icons.add),
+                          ))
+                ],
+              );
+            }
+
+            return Container();
+          },
+        ),
+      ),
     );
+    // return BlocConsumer<HomeBloc, HomeState>(
+    //   bloc: homeBloc,
+    //   listener: (context, state) {
+    //     // TODO: implement listener
+    //   },
+    //   builder: (context, state) {
+    //     if (state is HomeHideNavBar)
+    //     return Scaffold(
+    //       appBar: AppBar(
+    //         title: Text(widget.title),
+    //         actions: [
+    //           IconButton(
+    //             onPressed: () {
+    //               homeBloc.add(ExpandButtonClicked());
+    //             },
+    //             icon: Icon(Icons.add),
+    //           ),
+    //           IconButton(
+    //             onPressed: () {
+    //               homeBloc.add(RetractButtonClicked());
+    //             },
+    //             icon: Icon(Icons.remove),
+    //           )
+    //         ],
+    //       ),
+    //       body: Stack(
+    //         children: [
+    //           Center(
+    //             child: Column(
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               children: <Widget>[
+    //                 const Text(
+    //                   'Number of Times',
+    //                 ),
+    //                 Text(
+    //                   '$_counter',
+    //                   style: Theme.of(context).textTheme.headline4,
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+
+    //         ],
+    //       ),
+    //       floatingActionButton: FloatingActionButton(
+    //         onPressed: _incrementCounter,
+    //         tooltip: 'Increment',
+    //         child: const Icon(Icons.add),
+    //       ), // This trailing comma makes auto-formatting nicer for build methods.
+    //     );
+    //   },
+    //   listenWhen: (previous, current) => current is HomeInitial,
+    //   buildWhen: (previous, current) => current is! HomeInitial,
+    // );
   }
 }
