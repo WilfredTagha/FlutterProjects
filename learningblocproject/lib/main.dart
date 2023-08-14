@@ -1,3 +1,20 @@
+// // This is a stream that yields a number after every three seconds
+// Stream<int> boatStream() async* {
+//   for (int i = 1; i <= 10; i++) {
+//     print("SENT boat no. " + i.toString());
+//     await Future.delayed(Duration(seconds: 3));
+//     yield i;
+//   }
+// }
+
+// //This is the main function that calls the boatStream and listens to the data being sent
+// void main(List<String> args) async {
+//   Stream<int> stream = boatStream();
+//   stream.listen((recieved) {
+//     print("RECIEVED boat no. " + recieved.toString());
+//   });
+// }
+
 import 'package:flutter/material.dart';
 
 void main() {
