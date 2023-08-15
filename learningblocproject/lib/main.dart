@@ -17,85 +17,58 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'cubit/counter_cubit.dart';
+import 'package:learningblocproject/presentation/screens/second_screen.dart';
+import 'package:learningblocproject/presentation/screens/third_screen.dart';
+import 'logic/cubit/counter_cubit.dart';
+import 'presentation/screens/home_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final CounterCubit _counterCubit = CounterCubit();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterCubit(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      //no longer needed t
+      // home: const HomeScreen(
+      //   title: 'Flutter Demo Home Page',
+      //   color: Colors.orange,
+      // ),
+      routes: {
+        '/': (context) => BlocProvider.value(
+              value: _counterCubit,
+              child: const HomeScreen(title: "Second", color: Colors.blue),
+            ),
+        '/second': (context) => BlocProvider.value(
+              value: _counterCubit,
+              child: const SecondScreen(title: "Second", color: Colors.red),
+            ),
+        '/third': (context) => BlocProvider.value(
+              value: _counterCubit,
+              child: const ThirdScreen(title: "Third", color: Colors.green),
+            ),
+      },
     );
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  CounterCubit bloc = CounterCubit();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            BlocBuilder<CounterCubit, CounterState>(
-              builder: (context, state) {
-                return Text(
-                  state.count.toString(),
-                  style: Theme.of(context).textTheme.headline4,
-                );
-              },
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                FloatingActionButton(
-                  onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).decrement();
-                  },
-                  tooltip: 'Increment',
-                  child: const Icon(Icons.remove),
-                ), //
-                FloatingActionButton(
-                  onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).increment();
-                  },
-                  tooltip: 'Increment',
-                  child: const Icon(Icons.add),
-                ), //
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+  void dispose() {
+    _counterCubit.close();
+    super.dispose();
   }
 }
