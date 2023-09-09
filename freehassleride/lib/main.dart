@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freehassleride/bloc/home_bloc.dart';
 import 'package:freehassleride/ui/screens/otp_one.dart';
 import 'package:freehassleride/ui/screens/otp_two.dart';
+import 'package:freehassleride/ui/screens/sign_up.dart';
 
 import 'ui/screens/welcome_screen.dart';
 
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           //primarySwatch: Colors.orange,
           ),
-      home: const WelcomeScreen(),
+      home: const SignUp(),
     );
   }
 }

@@ -46,12 +46,42 @@ class OtpTwo extends StatelessWidget {
             SizedBox(
               height: h * 0.05,
             ),
-            Container(
-              height: h * (3 / 40),
-              width: w * .9,
-              decoration: BoxDecoration(
-                  color: Color(0xFFD9D9D9),
-                  borderRadius: BorderRadius.circular(20)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  height: h * (3 / 40),
+                  width: w * 0.85 / 6,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFD9D9D9),
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  height: h * (3 / 40),
+                  width: w * 0.85 / 6,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFD9D9D9),
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  height: h * (3 / 40),
+                  width: w * 0.85 / 6,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFD9D9D9),
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  height: h * (3 / 40),
+                  width: w * 0.85 / 6,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFD9D9D9),
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+              ],
             ),
             SizedBox(
               height: h * 0.05,
