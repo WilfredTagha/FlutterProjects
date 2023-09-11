@@ -29,11 +29,11 @@ class _SignUpState extends State<SignUp> {
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: h * 0.07,
+                    height: h * 0.04,
                   ),
                   Image.asset("assets/Vector.png"),
                   SizedBox(
-                    height: h * 0.07,
+                    height: h * 0.05,
                   ),
                   const Text(
                     "Sign Up",

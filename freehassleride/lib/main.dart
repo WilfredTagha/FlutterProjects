@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freehassleride/bloc/home_bloc.dart';
+import 'package:freehassleride/ui/screens/home.dart';
 import 'package:freehassleride/ui/screens/log_in.dart';
 import 'package:freehassleride/ui/screens/otp_one.dart';
 import 'package:freehassleride/ui/screens/otp_two.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           //primarySwatch: Colors.orange,
           ),
-      home: const LogIn(),
+      home: const Home(),
     );
   }
 }
