@@ -117,7 +117,12 @@ class _LogInState extends State<LogIn> {
                   SizedBox(
                     height: h * 0.08,
                   ),
-                  Button(h: h, w: w, text: "Log In"),
+                  Button(
+                    h: h,
+                    w: w,
+                    text: "Log In",
+                    named: "home",
+                  ),
                   Container(
                     padding: EdgeInsets.all(20),
                     child: Row(

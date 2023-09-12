@@ -34,7 +34,12 @@ class WelcomeScreen extends StatelessWidget {
           SizedBox(
             height: h * 0.2,
           ),
-          Button(h: h, w: w, text: "Welcome"),
+          Button(
+            h: h,
+            w: w,
+            text: "Welcome",
+            named: "otpone",
+          ),
         ],
       ),
     ));

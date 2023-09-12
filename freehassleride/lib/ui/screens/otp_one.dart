@@ -103,6 +103,7 @@ class OtpOne extends StatelessWidget {
               h: h,
               w: w,
               text: "Get Code",
+              named: "otptwo",
             ),
           ]),
         ),

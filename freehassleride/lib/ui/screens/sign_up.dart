@@ -168,7 +168,12 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: h * 0.08,
                   ),
-                  Button(h: h, w: w, text: "Sign Up"),
+                  Button(
+                    h: h,
+                    w: w,
+                    text: "Sign Up",
+                    named: "home",
+                  ),
                 ]),
           ),
         ),

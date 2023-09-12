@@ -90,6 +90,7 @@ class OtpTwo extends StatelessWidget {
               h: h,
               w: w,
               text: "Verify",
+              named: "signup",
             ),
             SizedBox(
               height: h * 0.05,

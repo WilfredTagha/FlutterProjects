@@ -5,7 +5,13 @@ import 'package:flutter/src/widgets/framework.dart';
 class Button extends StatelessWidget {
   final double h, w;
   final String text;
-  const Button({Key? key, required this.h, required this.w, required this.text})
+  final String named;
+  const Button(
+      {Key? key,
+      required this.h,
+      required this.w,
+      required this.text,
+      required this.named})
       : super(key: key);
 
   @override
@@ -25,7 +31,9 @@ class Button extends StatelessWidget {
               fontSize: 30,
             ),
           ))),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushNamed('/$named');
+      },
     );
   }
 }
