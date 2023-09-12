@@ -18,8 +18,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       body: Container(
         color: Color(0xFFD9D9D9),
         height: h,
@@ -71,6 +70,6 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-    ));
+    );
   }
 }
