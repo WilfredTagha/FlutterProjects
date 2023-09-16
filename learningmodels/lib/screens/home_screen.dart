@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:learningmodels/models/users.dart';
+import 'package:learningmodels/services/user_api.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,13 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
             final email = user.gender;
             final color = user.gender == "male" ? Colors.blue : Colors.green;
             final phone = user.phone;
-            final name = user.name;
+            final name = user.fullName;
             //  final name = "${user["first"]} ${user["name"]["last"]}";
             // final imageurl = user["picture"]["thumbnail"];
             return ListTile(
               tileColor: color,
 
-              title: Text("${name.title} ${name.first} ${name.last}"),
+              title: Text(name),
               // leading: ClipRRect(
               //   borderRadius: BorderRadius.circular(100),
               //   child: Image.network(imageurl),
@@ -51,30 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void fetchUsers() async {
-    print("fetch Users Called");
-    const url = 'https://randomuser.me/api/?results=5';
-    final uri = Uri.parse(url);
-    final response = await http.get(uri);
-    final body = response.body;
-    final json = jsonDecode(body);
-    final results = json['results'] as List<dynamic>;
-    final transformed = results.map((e) {
-      final name = UserName(
-          title: e['name']['title'],
-          first: e['name']['first'],
-          last: e['name']['last']);
-      return User(
-        cell: e['cell'],
-        email: e['email'],
-        gender: e['gender'],
-        phone: e['phone'],
-        nat: e['nat'],
-        name: name,
-      );
-    }).toList();
+    final response = await UserApi.fetchUsers();
     setState(() {
-      users = transformed;
+      users = response;
     });
-    print("fetch Users Complete");
   }
 }
